@@ -1,0 +1,45 @@
+<div class="loader" *ngIf="loading">
+  <img src="assets/images/loader.gif" />
+</div>
+<div class="container">
+  <div class="sidebar"></div>
+  <div class="content">
+    <h2>Integrations</h2>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="header">
+            <div class="title">
+              <img src="assets/svgs/github.svg" />
+              <span>Github</span>
+              <mat-icon *ngIf="integrated">check_circle</mat-icon>
+              <mat-icon *ngIf="integrated">history</mat-icon>
+            </div>
+            <div class="info" *ngIf="integrated">
+              <p>
+                Admin: Last Synced:
+                {{ user.lastSync | date : "YYYY-MM-dd hh:mm a" }}
+              </p>
+              <p>Sync Type: full</p>
+            </div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngIf="integrated; else connectTemplate">
+        <div class="remove">
+          <button mat-raised-button color="primary" (click)="remove()">
+            <span> Remove <img src="assets/svgs/private.svg" /></span>
+          </button>
+        </div>
+      </ng-container>
+      <ng-template #connectTemplate>
+        <div class="connect">
+          <button mat-raised-button color="primary" (click)="connect()">
+            Connect
+          </button>
+          <h2>Connect Sredio to Github</h2>
+        </div>
+      </ng-template>
+    </mat-expansion-panel>
+  </div>
+</div>
